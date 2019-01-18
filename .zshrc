@@ -2,6 +2,15 @@
 autoload -U compinit
 compinit
 
+# Load PostgreSQL versions into PATH 
+for dir in /usr/local/Cellar/libpq/* ; do
+  PATH="${dir}/bin/:${PATH}"
+done
+
+# PostgreSQL user and host settings for work
+export PGUSER="pillpack_development"
+export PGHOST=localhost
+
 # Start antibody plugin manager, load plugins
 source <(antibody init)
 antibody bundle < ~/.zsh_plugins.txt
@@ -23,14 +32,21 @@ alias zshconfig="vim ~/.zshrc"
 #Virtualenvwrapper things
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Code
-VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
-source /usr/local/bin/virtualenvwrapper.sh
+if [ -f /usr/local/bin/python ]; then
+  VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+fi
+
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 ####### POWERLEVEL9K #######
 
 # Set default user so context (user and host) is only printed if it's 
 # not the default (i.e. a remote session)
-DEFAULT_USER="peter"
+if [[ $(whoami)="peter.mutch" || $(whoami)="peter" ]]; then
+  DEFAULT_USER=$(whoami)
+fi
 
 # Two-line prompt so commands always start in the same place
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
@@ -62,5 +78,16 @@ POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX_FOREGROUND='white'
 
 ####### PYENV CONFIG #######
 # Must be last to avoid being overwritten by PATH modifications
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if (( $+commands[pyenv] )) ; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+####### OTHER PROFILES #######
+[[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+if [ -r ~/.bashrc ]; then
+  source ~/.bashrc
+fi

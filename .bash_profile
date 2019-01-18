@@ -6,8 +6,7 @@ export TERM=xterm-256color
 
 # Setting PATH for Python 3.6
 # The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
-export PATH
+export PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
 
 # Set iTerm2 window and tab bar to match Solarized Dark Higher Contrast
 # courtesy of https://www.iterm2.com/documentation-escape-codes.html

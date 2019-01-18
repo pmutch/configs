@@ -1,6 +1,5 @@
 # Antibody loads a list of zsh plugins hosted on github
 
-#robbyrussell/oh-my-zsh path:plugins/pyenv
 robbyrussell/oh-my-zsh path:plugins/virtualenv
 robbyrussell/oh-my-zsh path:plugins/python
 robbyrussell/oh-my-zsh path:plugins/git
