@@ -129,9 +129,11 @@ export PATH=~/Library/Python/3.7/bin:$PATH
 
 # Load PostgreSQL versions into PATH 
 
-for dir in /usr/local/Cellar/libpq/* ; do
-  path=($path ${dir}/bin)
-done
+if [ -d "/usr/local/Cellar/libpq" ]; then
+  for dir in /usr/local/Cellar/libpq/* ; do
+    path=($path ${dir}/bin)
+  done
+fi
 
 # PostgreSQL user and host settings for work
 
@@ -161,5 +163,4 @@ if [ -r ~/.bashrc ]; then
   source ~/.bashrc
 fi
 
-#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
