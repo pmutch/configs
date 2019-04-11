@@ -32,6 +32,8 @@ COMPLETION_WAITING_DOTS="true"
 #export KEYTIMEOUT=.1
 
 
+
+
 ####### ANTIBODY #######
 
 # Antibody loads the powerlevel9k plugin, and this variable must be set before doing so.
@@ -110,8 +112,6 @@ POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX_FOREGROUND='white'
 
 ####### VIRTUALENVWRAPPER #######
 
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Code
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
   export WORKON_HOME=$HOME/.virtualenvs
   export PROJECT_HOME=$HOME/Code
@@ -163,4 +163,7 @@ if [ -r ~/.bashrc ]; then
   source ~/.bashrc
 fi
 
-
+###### NVM ######
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
