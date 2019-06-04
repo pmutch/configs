@@ -140,6 +140,10 @@ fi
 export PGUSER="pillpack_development"
 export PGHOST=localhost
 
+###### JAVA HOME ENV VARIABLE ######
+
+export JAVA_HOME="$(/usr/libexec/java_home)"
+
 
 ####### PYENV CONFIG #######
 
