@@ -139,4 +139,4 @@ export JAVA_HOME="$(/usr/libexec/java_home)"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-[[ -s "$HOME/.bash_profile" ]] && source "$HOME/.bash_profile" # Load bash_profile
+
