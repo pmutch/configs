@@ -9,7 +9,7 @@
 
 # Make path variable unique to prevent duplicate entries
 
-typeset -U path
+typeset -aU path
 
 # Start zsh completion
 
@@ -125,7 +125,7 @@ fi
 
 ####### PIP BINARIES #######
 
-export PATH=~/Library/Python/3.7/bin:$PATH
+path=($HOME/Library/Python/3.7/bin $path)
 
 
 ####### POSTGRES #######
@@ -143,15 +143,26 @@ fi
 export PGUSER="pillpack_development"
 export PGHOST=localhost
 
+###### JAVA HOME ENV VARIABLE ######
+
+export JAVA_HOME="$(/usr/libexec/java_home)"
+
 
 ####### PYENV CONFIG #######
 
 # Pyenv config must be last to avoid being overwritten by PATH modifications
-
-if (( $+commands[pyenv] )) ; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
+# Pyenv appears to cause its shims to be added to PATH multiple times, 
+# even when path is set to be unique. This is both in accordance with what 
+# happened when I tried to use it in my zsh environment and implied by their
+# documentation. It's probably best to avoid loading it at every interactive 
+# prompt, or even at every zsh instance, until I'm willing to figure out how 
+# to prevent this from happening--potentially by modifying pyenv init or 
+# referring to the Advanced Configuration section of their README. 
+#
+#if (( $+commands[pyenv] )) ; then
+#  eval "$(pyenv init -)"
+#  eval "$(pyenv virtualenv-init -)"
+#fi
 
 
 ####### OTHER PROFILES #######
@@ -162,11 +173,9 @@ fi
 
 [[ -s "$HOME/.bash_profile" ]] && source "$HOME/.bash_profile" # Load bash_profile
 
-if [ -r ~/.bashrc ]; then
-  source ~/.bashrc
-fi
+[[ -s "$HOME/.bashrc" ]] && source ~/.bashrc # Load .bashrc
 
 ###### NVM ######
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
