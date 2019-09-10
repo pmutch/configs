@@ -53,7 +53,10 @@ antibody bundle < ~/.zsh_plugins.txt
 alias zshconfig="vim ~/.zshrc"  
 alias ls="ls -G" 		# Adds colored output
 
-# chpwd() is called every time the working directory is changed. This function 
+# Access pillpack production console 
+
+alias prod="source ~/Code/infrastructure/venv/bin/activate && ~/Code/infrastructure/scripts/wrap_mfa.py --aws-account-name EngineYard --aws-role-name pillpack_iam_dev ~/Code/infrastructure/scripts/ssmyo.py --stack Broadwing-prod4 --utility-ppcore"
+
 # causes chpwd() to function as it normally would in zsh and ls in the new dir. 
 
 function chpwd() {
