@@ -1,6 +1,6 @@
-# Set CLICOLOR if you want Ansi Colors in iTerm2
-export CLICOLOR=1
+[[ -s "$HOME/.profile" ]] && source $HOME/.profile
 
-# Set colors to match iTerm2 Terminal Colors
-export TERM=xterm-256color
-
+# macOS considers each new command prompt to be a login session,
+# which means it looks at this profile but NOT the bashrc, which means
+# we have to source it manually here.
+[[ -s "$HOME/.bashrc" ]] && source $HOME/.bashrc
