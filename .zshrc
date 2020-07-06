@@ -38,7 +38,7 @@ COMPLETION_WAITING_DOTS="true"
 
 # Antibody loads the powerlevel9k plugin, and this variable must be set before doing so.
 
-POWERLEVEL9K_MODE='nerdfont-complete'
+# POWERLEVEL9K_MODE='nerdfont-complete'
 
 # Start antibody plugin manager, dynamically load plugins
 # Static loading: 
@@ -46,7 +46,9 @@ POWERLEVEL9K_MODE='nerdfont-complete'
 # the next line sources the file you just generated, so sourcing this file
 # sources that file. This loads all zsh plugins--statically. Hopefully this
 # results in faster startup times. 
-source ~/.zsh_plugins.sh
+if [ -f ~/.zsh_plugins.sh ]; then 
+  source ~/.zsh_plugins.sh
+fi
 
 ####### ALIASES #######
 
@@ -68,6 +70,8 @@ function chpwd() {
 
 
 ####### POWERLEVEL9K #######
+
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # On the left, show user and host if its not peter@mercury, git repo info,
 # and error code of last command if it resulted in an error.
@@ -117,7 +121,9 @@ POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX_FOREGROUND='white'
 
 ###### ITERM2 SHELL INTEGRATION ######
 
-source 	~/.iterm2_shell_integration.zsh
+if [ -f ~/.iterm2_shell_integration.zsh ]; then 
+  source ~/.iterm2_shell_integration.zsh
+fi
 
 ###### RVM ######
 # Has to be loaded last or RubyMine complains
