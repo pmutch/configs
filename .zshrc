@@ -14,7 +14,7 @@ typeset -aU path
 # Start zsh completion
 
 autoload -U compinit
-compinit
+compinit 
 
 
 # Hyphen-insensitive autocompletion
@@ -119,6 +119,17 @@ POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX_FOREGROUND='white'
 
 source 	~/.iterm2_shell_integration.zsh
 
+
+###### NVM ######
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+###### PYTHON ###### 
+export PATH=~/Library/Python/3.8/bin:$PATH
 ###### RVM ######
 # Has to be loaded last or RubyMine complains
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

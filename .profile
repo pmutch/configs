@@ -127,3 +127,8 @@ path=($path /usr/local/sbin)
 
 ###### FORTIFY ######
 export PATH="$PATH:/Applications/Fortify/Fortify_SCA_and_Apps_20.1.0/bin"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+export PATH="$HOME/.poetry/bin:$PATH"
