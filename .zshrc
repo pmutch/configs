@@ -42,22 +42,22 @@ POWERLEVEL9K_MODE='nerdfont-complete'
 
 # Start antibody plugin manager, dynamically load plugins
 # Static loading: 
-# run `antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh`
+# run `antibody bundle < $HOME/.zsh_plugins.txt > $HOME/.zsh_plugins.sh`
 # the next line sources the file you just generated, so sourcing this file
 # sources that file. This loads all zsh plugins--statically. Hopefully this
 # results in faster startup times. 
-source ~/.zsh_plugins.sh
+source $HOME/.zsh_plugins.sh
 
 ####### ALIASES #######
 
 # For a full list of active aliases, run `alias`.
 
-alias zshconfig="vim ~/.zshrc"
+alias zshconfig="vim $HOME/.zshrc"
 alias ls="ls -G" 		# Adds colored output
 
 # Access pillpack production console 
-if [ -f ~/Code/infrastructure/venv/bin/activate ]; then
-    alias prod="source ~/Code/infrastructure/venv/bin/activate && ~/Code/infrastructure/scripts/wrap_mfa.py --aws-account-name EngineYard --aws-role-name pillpack_iam_dev ~/Code/infrastructure/scripts/ssmyo.py --stack Broadwing-prod4 --utility-ppcore"
+if [ -f $HOME/Code/infrastructure/venv/bin/activate ]; then
+    alias prod="source $HOME/Code/infrastructure/venv/bin/activate && $HOME/Code/infrastructure/scripts/wrap_mfa.py --aws-account-name EngineYard --aws-role-name pillpack_iam_dev $HOME/Code/infrastructure/scripts/ssmyo.py --stack Broadwing-prod4 --instance-type=utility-ppcore"
 fi
 # causes chpwd() to function as it normally would in zsh and ls in the new dir. 
 
@@ -84,7 +84,7 @@ POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 # Set default user so context (user and host) is only printed if it's
 # in some way unusual
 
-if [[ $(whoami)="peter.mutch" || $(whoami)="peter" ]]; then
+if [[ $(whoami)="peter.mutch" || $(whoami)="peter" || $(whoami)="mutchp" ]]; then
   DEFAULT_USER=$(whoami)
 fi
 
@@ -117,7 +117,7 @@ POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX_FOREGROUND='white'
 
 ###### ITERM2 SHELL INTEGRATION ######
 
-source 	~/.iterm2_shell_integration.zsh
+source 	$HOME/.iterm2_shell_integration.zsh
 
 
 ###### NVM ######
@@ -126,10 +126,17 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 ###### PYTHON ###### 
-export PATH=~/Library/Python/3.8/bin:$PATH
+export PATH="$PATH:$HOME/Library/Python/3.8/bin"
+
+###### GO ######
+export PATH="$PATH:$HOME/go/bin"
+export GOPATH=$(go env GOPATH)
 ###### RVM ######
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
 # Has to be loaded last or RubyMine complains
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+###### AWS ###### 
+export USER="peter.mutch"
